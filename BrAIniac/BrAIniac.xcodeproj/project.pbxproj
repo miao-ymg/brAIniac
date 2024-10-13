@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		225FF1F32CB9571800B2B9BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 225FF1EA2CB9571800B2B9BF /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		225FF1EA2CB9571800B2B9BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		228310552CB71C88008BA2C9 /* BrAIniac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrAIniac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -33,6 +38,7 @@
 			isa = PBXGroup;
 			children = (
 				228310572CB71C88008BA2C9 /* BrAIniac */,
+				225FF1EA2CB9571800B2B9BF /* Assets.xcassets */,
 				228310562CB71C88008BA2C9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,6 +116,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225FF1F32CB9571800B2B9BF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,8 +19,8 @@ struct ContentView: View {
         }
         
         // Canvas to draw on
-        CanvasView(lines: $viewModel.lines)
-            .frame(width: dimensions, height: dimensions)
+        CanvasView(strokes: $viewModel.strokes)
+            .frame(width: sideLength, height: sideLength)
             // Rounded edges for the canvas
             .cornerRadius(10)
             .overlay(
@@ -66,7 +66,7 @@ struct ContentView: View {
             HStack {
                 Text("I recognized: ")
                     .font(Font.system(size: 24))
-                Text("\(viewModel.predictedNumber)")
+                Text("\(viewModel.prediction.predictedNumber)")
                     .font(Font.system(size: 36, weight: .semibold))
             }
             

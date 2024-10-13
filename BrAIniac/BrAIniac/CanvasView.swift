@@ -7,42 +7,42 @@
 
 import SwiftUI
 
-let dimensions: CGFloat = 280
-let lineWidth: CGFloat = 10
-
 struct CanvasView: View {
-    @Binding var lines: [[CGPoint]]
+    @Binding var strokes: [[CGPoint]]
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                // Canvas background
                 Color.white
                 
                 Path { path in
-                    for line in lines {
-                        path.addLines(line)
+                    for stroke in strokes {
+                        path.addLines(stroke)
                     }
                 }
-                .stroke(Color.blue, lineWidth: lineWidth)
+                .stroke(Color.blue, lineWidth: strokeWidth)
             }
             .gesture(DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let location = value.location
+                    // Normalized location of drawn point
                     let localLocation = CGPoint(
                         x: location.x - geometry.frame(in: .local).minX,
                         y: location.y - geometry.frame(in: .local).minY
                     )
-                    
+                    // Check if user's finger is within canvas frame
                     if isWithinEdges(coordinate: localLocation.x) && isWithinEdges(coordinate: localLocation.y) {
-                        if lines.isEmpty || (lines.last?.isEmpty ?? true) {
-                            lines.append([localLocation])
+                        if strokes.isEmpty || (strokes.last?.isEmpty ?? true) {
+                            strokes.append([localLocation])
                         } else {
-                            lines[lines.count - 1].append(localLocation)
+                            strokes[strokes.count - 1].append(localLocation)
                         }
                     }
                 }
                 .onEnded { _ in
-                    lines.append([])
+                    // Prepare new stroke
+                    strokes.append([])
                 }
             )
         }
@@ -51,5 +51,5 @@ struct CanvasView: View {
 
 
 func isWithinEdges(coordinate: Double) -> Bool {
-    return (lineWidth / 2...dimensions - lineWidth / 2).contains(coordinate)
+    return (strokeWidth / 2...sideLength - strokeWidth / 2).contains(coordinate)
 }
