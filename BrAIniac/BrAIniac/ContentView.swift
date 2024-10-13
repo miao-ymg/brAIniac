@@ -70,6 +70,13 @@ struct ContentView: View {
                     .font(Font.system(size: 36, weight: .semibold))
             }
             
+            // (Only for debugging purposes)
+            VStack {
+                ForEach(viewModel.prediction.confidences, id: \.self) { confidence in
+                    Text("\(confidence.digit):  \(confidence.confidence)")
+                }
+            }
+
             // Allow feedback
             HStack {
                 // Correct prediction

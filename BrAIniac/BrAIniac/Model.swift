@@ -58,13 +58,7 @@ func requestPrediction(image: UIImage) async throws -> Data {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw MyError.error
         }
-        
-        // Print Response Data
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print(jsonString)
-        }
         return data
-        
     } catch {
         throw MyError.error
     }

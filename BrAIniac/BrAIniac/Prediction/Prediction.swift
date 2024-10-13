@@ -9,17 +9,22 @@ import SwiftUI
 
 @Observable class Prediction: Decodable {
     var predictedNumber: String = "N/A"
-    // var confidences: [Confidence]
+    var confidences: [Confidence] = []
     
     init() { }
     
-    // Decodable
     enum CodingKeys: String, CodingKey {
         case predictedNumber = "top"
+        case confidences = "predictions"
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.predictedNumber = try container.decode(String.self, forKey: .predictedNumber)
+
+        predictedNumber = try container.decode(String.self, forKey: .predictedNumber)
+        confidences = try container.decode([Confidence].self, forKey: .confidences)
+
+        // Sort confidences from 0 to 9
+        confidences = confidences.sorted { $0.digit < $1.digit }
     }
 }
