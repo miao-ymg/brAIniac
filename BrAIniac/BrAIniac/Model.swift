@@ -43,7 +43,10 @@ func requestPrediction(image: UIImage) async throws -> Data {
     let postData = fileContent?.data(using: .utf8) ?? Data()
     
     // Initialize Inference Server Request
-    var request = URLRequest(url: URL(string: "https://classify.roboflow.com/mnist-cjkff/1?api_key=V4yegyaXLxid9UUiR6Dy")!, timeoutInterval: Double.infinity)
+    guard let url = URL(string: "https://classify.roboflow.com/mnist-cjkff/1?api_key=V4yegyaXLxid9UUiR6Dy") else {
+        throw MyError.error
+    }
+    var request = URLRequest(url: url, timeoutInterval: Double.infinity)
     request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     request.httpMethod = "POST"
     request.httpBody = postData
@@ -53,7 +56,6 @@ func requestPrediction(image: UIImage) async throws -> Data {
     
     do {
         let (data, response) = try await URLSession.shared.data(for: request)
-        
         // Ensure the response is valid
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw MyError.error

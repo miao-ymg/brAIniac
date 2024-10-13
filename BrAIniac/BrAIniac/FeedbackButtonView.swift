@@ -17,7 +17,7 @@ struct FeedbackButtonView: View {
         Button {
             viewModel.clearCanvas()
             viewModel.score.updateScore(isCorrect: isCorrect)
-            viewModel.toggleHasRequestedPrediction()
+            viewModel.appState = AppState.drawing
         } label: {
             Image(systemName: sfsSymbol)
         }

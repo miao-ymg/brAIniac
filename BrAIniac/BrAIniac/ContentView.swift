@@ -31,37 +31,44 @@ struct ContentView: View {
         Spacer()
             .frame(height: 20)
         
-        // Button to clear the canvas
-        Button {
-            if !viewModel.hasRequestedPrediction {
+        switch viewModel.appState {
+        // State A): The drawing has not been created yet
+        case .drawing:
+            // Button to clear the canvas
+            Button {
                 viewModel.clearCanvas()
+            } label: {
+                Image(systemName: "trash")
+                Text("Clear Canvas")
             }
-        } label: {
-            Image(systemName: "trash")
-            Text("Clear Canvas")
-        }
-        .frame(height: 50)
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-        .foregroundStyle(Color.white)
-        .background(Color.secondary)
-        .cornerRadius(10)
-        .padding(.horizontal)
-        
-        // Button to make AI prediction
-        Button {
-            viewModel.makePrediction()
-        } label: {
-            Image(systemName: "brain.filled.head.profile")
-            Text("Recognize Number!")
-        }
-        .frame(height: 50)
-        .frame(maxWidth: .infinity)
-        .foregroundStyle(Color.white)
-        .background(Color.blue)
-        .cornerRadius(10)
-        .padding(.horizontal)
-        
-        if viewModel.hasRequestedPrediction {
+            .frame(height: 50)
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+            .foregroundStyle(Color.white)
+            .background(Color.secondary)
+            .cornerRadius(10)
+            .padding(.horizontal)
+            
+            // Button to make AI prediction
+            Button {
+                viewModel.makePrediction()
+            } label: {
+                Image(systemName: "brain.filled.head.profile")
+                Text("Recognize Number!")
+            }
+            .frame(height: 50)
+            .frame(maxWidth: .infinity)
+            .foregroundStyle(Color.white)
+            .background(Color.blue)
+            .cornerRadius(10)
+            .padding(.horizontal)
+            
+        // State B): A digit recognition request was made
+        case .thinking:
+            Text("Thinking...")
+                .font(Font.system(size: 36, weight: .semibold))
+            
+        // State C): The AI model made a prediction
+        case .madePrediction:
             // Display AI prediction
             HStack {
                 Text("I recognized: ")
@@ -98,6 +105,7 @@ struct ContentView: View {
             }
             .foregroundStyle(Color.white)
         }
+
         // Scoreboard
         Text("Correct predictions:")
             .font(Font.system(size: 24))

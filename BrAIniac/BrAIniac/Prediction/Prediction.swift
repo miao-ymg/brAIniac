@@ -24,7 +24,7 @@ import SwiftUI
         predictedNumber = try container.decode(String.self, forKey: .predictedNumber)
         confidences = try container.decode([Confidence].self, forKey: .confidences)
 
-        // Sort confidences from 0 to 9
+        // Sort confidences from 0 to 9 using Closures
         confidences = confidences.sorted { $0.digit < $1.digit }
     }
 }
