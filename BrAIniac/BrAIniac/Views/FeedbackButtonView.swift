@@ -15,9 +15,7 @@ struct FeedbackButtonView: View {
     
     var body: some View {
         Button {
-            viewModel.clearCanvas()
-            viewModel.score.updateScore(isCorrect: isCorrect)
-            viewModel.appState = AppState.drawing
+            viewModel.giveFeedback(isCorrect: isCorrect)
         } label: {
             Image(systemName: sfsSymbol)
         }

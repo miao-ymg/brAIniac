@@ -39,7 +39,6 @@ let confBarWidth: CGFloat = 8
                 // Decode API response
                 prediction = try JSONDecoder().decode(Prediction.self, from: jsonData)
                 appState = AppState.madePrediction
-
             } catch NetworkError.invalidURL {
                 print("ERROR: Invalid URL")
             } catch NetworkError.invalidResponse {
@@ -52,6 +51,12 @@ let confBarWidth: CGFloat = 8
         }
     }
     
+    func giveFeedback(isCorrect: Bool) {
+        clearCanvas()
+        score.updateScore(isCorrect: isCorrect)
+        appState = AppState.drawing
+    }
+
     func clearCanvas() {
         strokes.removeAll()
     }
