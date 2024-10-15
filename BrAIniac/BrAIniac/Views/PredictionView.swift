@@ -30,6 +30,7 @@ struct PredictionView: View {
             Text("\(viewModel.prediction.predictedNumber)")
                 .font(Font.system(size: 36, weight: .semibold))
         }
+        .padding(4)
         
         Spacer()
         

@@ -16,7 +16,7 @@ struct ConfidenceBarView: View {
         VStack {
             ZStack(alignment: .bottom) {
                 Capsule()
-                    .fill(Color.white)
+                    .fill(Color.light)
                     .frame(height: confBarHeight)
                 Capsule()
                     .fill(conf.confidence == maxConfidence ? Color.teal : Color.gray)

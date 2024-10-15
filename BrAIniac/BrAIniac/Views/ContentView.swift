@@ -15,10 +15,11 @@ struct ContentView: View {
             Text("BrAIniac")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                // .font(.promptFont(40, weight: .semibold))
             Spacer()
             // Image("")
         }
-        .padding(20)
+        .padding(.leading, 32)
         
         // Canvas to draw on
         VStack {

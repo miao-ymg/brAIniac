@@ -12,7 +12,7 @@ import os
 let canvasSideLength: CGFloat = 280
 let strokeWidth: CGFloat = 8
 // Confidence bar dimensions
-let confBarHeight: CGFloat = 128
+let confBarHeight: CGFloat = 120
 let confBarWidth: CGFloat = 12
 
 @Observable class ViewModel {
@@ -24,10 +24,13 @@ let confBarWidth: CGFloat = 12
     var score = Score()
     // One of three states which the app currently is in
     var appState = AppState.drawing
+    // Bool whether user tries to submit an empty drawing
+    var hasEmptySubmission = false
     
     
     func makePrediction() {
         if strokes.isEmpty {
+            hasEmptySubmission = true
             return
         }
         
@@ -35,6 +38,7 @@ let confBarWidth: CGFloat = 12
             do {
                 let drawing = try createImage(from: strokes, sideLength: canvasSideLength)
                 appState = AppState.thinking
+                hasEmptySubmission = false
                 // Asynchronous call
                 let jsonData = try await requestPrediction(image: drawing)
                 // Decode API response
