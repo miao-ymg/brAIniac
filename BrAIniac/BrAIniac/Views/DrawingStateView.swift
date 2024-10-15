@@ -24,11 +24,7 @@ struct DrawingStateView: View {
             Image(systemName: "trash")
             Text("Clear Canvas")
         }
-        .frame(height: 50)
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-        .foregroundStyle(Color.white)
-        .background(Color.secondary)
-        .cornerRadius(10)
+        .buttonModifier(backgroundColor: Color.secondary)
         .padding(.horizontal)
 
         // Button to make AI prediction
@@ -38,11 +34,7 @@ struct DrawingStateView: View {
             Image(systemName: "brain.filled.head.profile")
             Text("Recognize Number!")
         }
-        .frame(height: 50)
-        .frame(maxWidth: .infinity)
-        .foregroundStyle(Color.white)
-        .background(Color.blue)
-        .cornerRadius(10)
+        .buttonModifier(backgroundColor: Color.blue)
         .padding(.horizontal)
     }
 }

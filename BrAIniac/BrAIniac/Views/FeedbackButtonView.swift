@@ -19,9 +19,6 @@ struct FeedbackButtonView: View {
         } label: {
             Image(systemName: sfsSymbol)
         }
-        .frame(height: 50)
-        .frame(maxWidth: .infinity)
-        .background(buttonColor)
-        .cornerRadius(10)
+        .buttonModifier(backgroundColor: buttonColor)
     }
 }
