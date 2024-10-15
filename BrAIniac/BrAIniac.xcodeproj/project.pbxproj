@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		225FF1F32CB9571800B2B9BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 225FF1EA2CB9571800B2B9BF /* Assets.xcassets */; };
+		22C067982CBDC86500BEDC0D /* Subsonic in Frameworks */ = {isa = PBXBuildFile; productRef = 22C067972CBDC86500BEDC0D /* Subsonic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C067982CBDC86500BEDC0D /* Subsonic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +74,7 @@
 			);
 			name = BrAIniac;
 			packageProductDependencies = (
+				22C067972CBDC86500BEDC0D /* Subsonic */,
 			);
 			productName = BrAIniac;
 			productReference = 228310552CB71C88008BA2C9 /* BrAIniac.app */;
@@ -101,6 +104,9 @@
 			);
 			mainGroup = 2283104C2CB71C87008BA2C9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				22C067962CBDC86500BEDC0D /* XCRemoteSwiftPackageReference "Subsonic" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 228310562CB71C88008BA2C9 /* Products */;
 			projectDirPath = "";
@@ -355,6 +361,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		22C067962CBDC86500BEDC0D /* XCRemoteSwiftPackageReference "Subsonic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/Subsonic.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22C067972CBDC86500BEDC0D /* Subsonic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22C067962CBDC86500BEDC0D /* XCRemoteSwiftPackageReference "Subsonic" */;
+			productName = Subsonic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2283104D2CB71C87008BA2C9 /* Project object */;
 }
