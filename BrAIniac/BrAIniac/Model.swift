@@ -43,7 +43,7 @@ func requestPrediction(image: UIImage) async throws -> Data {
     
     // Initialize Inference Server Request
     guard let url = URL(string: "https://classify.roboflow.com/mnist-cjkff/1?api_key=V4yegyaXLxid9UUiR6Dy") else {
-        throw MyError.error
+        throw NetworkError.invalidURL
     }
     var request = URLRequest(url: url, timeoutInterval: Double.infinity)
     request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
@@ -57,10 +57,10 @@ func requestPrediction(image: UIImage) async throws -> Data {
         let (data, response) = try await URLSession.shared.data(for: request)
         // Ensure the response is valid
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw MyError.error
+            throw NetworkError.invalidResponse
         }
         return data
     } catch {
-        throw MyError.error
+        throw NetworkError.invalidData
     }
 }

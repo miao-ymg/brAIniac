@@ -39,8 +39,15 @@ let confBarWidth: CGFloat = 8
                 // Decode API response
                 prediction = try JSONDecoder().decode(Prediction.self, from: jsonData)
                 appState = AppState.madePrediction
+
+            } catch NetworkError.invalidURL {
+                print("ERROR: Invalid URL")
+            } catch NetworkError.invalidResponse {
+                print("ERROR: Invalid response")
+            } catch NetworkError.invalidData {
+                print("ERROR: Invalid data")
             } catch {
-                print("Error during prediction request or decoding: \(error)")
+                print("Unexpected error: \(error)")
             }
         }
     }
