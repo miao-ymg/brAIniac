@@ -11,15 +11,8 @@ struct ContentView: View {
     @State private var viewModel = ViewModel()
     
     var body: some View {
-        // Instructions
-        HStack {
-            Image(systemName: "pencil.and.scribble")
-            Text("Draw a number between 0 and 9")
-                .fontWeight(.medium)
-        }
-        
         // Canvas to draw on
-        CanvasView(strokes: $viewModel.strokes)
+        CanvasView(strokes: $viewModel.strokes, appState: viewModel.appState)
             .frame(width: canvasSideLength, height: canvasSideLength)
             // Rounded edges for the canvas
             .cornerRadius(10)
@@ -34,6 +27,12 @@ struct ContentView: View {
         switch viewModel.appState {
         // State A): The drawing has not been created yet
         case .drawing:
+            // Instructions
+            HStack {
+                Image(systemName: "pencil.and.scribble")
+                Text("Draw a number between 0 and 9")
+                    .fontWeight(.medium)
+            }
             // Button to clear the canvas
             Button {
                 viewModel.clearCanvas()
@@ -108,10 +107,12 @@ struct ContentView: View {
         }
 
         // Scoreboard
-        Text("Correct predictions:")
-            .font(Font.system(size: 24))
-        Text(viewModel.score.displayScore())
-            .font(Font.system(size: 36, weight: .semibold))
+        HStack {
+            Text("Correct predictions:")
+                .font(Font.system(size: 24))
+            Text(viewModel.score.displayScore())
+                .font(Font.system(size: 36, weight: .semibold))
+        }
     }
 }
 

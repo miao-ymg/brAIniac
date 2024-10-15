@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CanvasView: View {
     @Binding var strokes: [[CGPoint]]
+    var appState: AppState
     
     var body: some View {
         GeometryReader { geometry in
@@ -25,6 +26,10 @@ struct CanvasView: View {
             }
             .gesture(DragGesture(minimumDistance: 0)
                 .onChanged { value in
+                    if appState != AppState.drawing {
+                        return
+                    }
+
                     let location = value.location
                     // Normalized location of drawn point
                     let localLocation = CGPoint(
@@ -41,8 +46,10 @@ struct CanvasView: View {
                     }
                 }
                 .onEnded { _ in
-                    // Prepare new stroke
-                    strokes.append([])
+                    if appState == AppState.drawing {
+                        // Prepare new stroke
+                        strokes.append([])
+                    }
                 }
             )
         }
