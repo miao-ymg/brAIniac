@@ -8,8 +8,11 @@
 import SwiftUI
 
 // GLOBAL CONSTANTS
-let sideLength: CGFloat = 280
+let canvasSideLength: CGFloat = 280
 let strokeWidth: CGFloat = 8
+// Confidence bar dimensions
+let confBarHeight: CGFloat = 100
+let confBarWidth: CGFloat = 8
 
 @Observable class ViewModel {
     // The collection of strokes drawn
@@ -27,8 +30,8 @@ let strokeWidth: CGFloat = 8
             return
         }
         
+        let drawing = createImage(from: strokes, sideLength: canvasSideLength)
         appState = AppState.thinking
-        let drawing = createImage(from: strokes, sideLength: sideLength)
         Task {
             do {
                 // Asynchronous call

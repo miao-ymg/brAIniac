@@ -5,7 +5,6 @@
 //  Created by Sam Miao on 11.10.24.
 //
 
-import SwiftUI
 import UIKit
 
 func createImage(from points: [[CGPoint]], sideLength: CGFloat) -> UIImage {

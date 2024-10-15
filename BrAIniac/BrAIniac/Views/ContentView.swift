@@ -20,7 +20,7 @@ struct ContentView: View {
         
         // Canvas to draw on
         CanvasView(strokes: $viewModel.strokes)
-            .frame(width: sideLength, height: sideLength)
+            .frame(width: canvasSideLength, height: canvasSideLength)
             // Rounded edges for the canvas
             .cornerRadius(10)
             .overlay(
@@ -69,6 +69,15 @@ struct ContentView: View {
             
         // State C): The AI model made a prediction
         case .madePrediction:
+            // Display confidence bar for each digit
+            HStack {
+                ForEach(viewModel.prediction.confidences, id: \.self) { confidence in
+                    ConfidenceBarView(
+                        conf: confidence,
+                        maxConfidence: viewModel.prediction.maxConfidence
+                    )
+                }
+            }
             // Display AI prediction
             HStack {
                 Text("I recognized: ")
@@ -76,14 +85,6 @@ struct ContentView: View {
                 Text("\(viewModel.prediction.predictedNumber)")
                     .font(Font.system(size: 36, weight: .semibold))
             }
-            
-            // (Only for debugging purposes)
-            VStack {
-                ForEach(viewModel.prediction.confidences, id: \.self) { confidence in
-                    Text("\(confidence.digit):  \(confidence.confidence)")
-                }
-            }
-
             // Allow feedback
             HStack {
                 // Correct prediction

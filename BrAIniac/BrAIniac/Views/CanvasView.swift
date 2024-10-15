@@ -51,5 +51,5 @@ struct CanvasView: View {
 
 
 func isWithinEdges(coordinate: Double) -> Bool {
-    return (strokeWidth / 2...sideLength - strokeWidth / 2).contains(coordinate)
+    return (strokeWidth / 2...canvasSideLength - strokeWidth / 2).contains(coordinate)
 }
