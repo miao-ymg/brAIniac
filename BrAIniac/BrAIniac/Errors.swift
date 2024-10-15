@@ -10,3 +10,7 @@ enum NetworkError: Error {
     case invalidResponse
     case invalidData
 }
+
+enum ImageError: Error {
+    case creationFailed
+}

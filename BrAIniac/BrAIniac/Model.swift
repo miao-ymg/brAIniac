@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import os
 
-func createImage(from points: [[CGPoint]], sideLength: CGFloat) -> UIImage {
+func createImage(from points: [[CGPoint]], sideLength: CGFloat) throws -> UIImage {
     UIGraphicsBeginImageContext(CGSize(width: sideLength, height: sideLength))
     // Black digit required for AI model to work
     UIColor.black.setStroke()
@@ -26,7 +27,9 @@ func createImage(from points: [[CGPoint]], sideLength: CGFloat) -> UIImage {
     // Create solid lines
     path.stroke()
     
-    let image = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+    guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
+        throw ImageError.creationFailed
+    }
     UIGraphicsEndImageContext()
     
     return image
@@ -50,14 +53,19 @@ func requestPrediction(image: UIImage) async throws -> Data {
     request.httpMethod = "POST"
     request.httpBody = postData
     
+    let logger = Logger()
     // Execute Post Request
-    print("Making prediction request...")
+    logger.info("Making prediction request...")
     
     do {
         let (data, response) = try await URLSession.shared.data(for: request)
         // Ensure the response is valid
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse, [200, 301, 302].contains(httpResponse.statusCode) else {
             throw NetworkError.invalidResponse
+        }
+
+        if let jsonString = String(data: data, encoding: .utf8) {
+            logger.info("\(jsonString)")
         }
         return data
     } catch {

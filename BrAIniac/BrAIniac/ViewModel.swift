@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os
 
 // GLOBAL CONSTANTS
 let canvasSideLength: CGFloat = 280
@@ -30,23 +31,25 @@ let confBarWidth: CGFloat = 8
             return
         }
         
-        let drawing = createImage(from: strokes, sideLength: canvasSideLength)
-        appState = AppState.thinking
         Task {
             do {
+                let drawing = try createImage(from: strokes, sideLength: canvasSideLength)
+                appState = AppState.thinking
                 // Asynchronous call
                 let jsonData = try await requestPrediction(image: drawing)
                 // Decode API response
                 prediction = try JSONDecoder().decode(Prediction.self, from: jsonData)
                 appState = AppState.madePrediction
             } catch NetworkError.invalidURL {
-                print("ERROR: Invalid URL")
+                Logger().info("ERROR: Invalid URL")
             } catch NetworkError.invalidResponse {
-                print("ERROR: Invalid response")
+                Logger().info("ERROR: Invalid response")
             } catch NetworkError.invalidData {
-                print("ERROR: Invalid data")
+                Logger().info("ERROR: Invalid data")
+            } catch ImageError.creationFailed {
+                Logger().info("ERROR: Failed to create a drawing")
             } catch {
-                print("Unexpected error: \(error)")
+                Logger().info("Unexpected error: \(error)")
             }
         }
     }
@@ -56,7 +59,7 @@ let confBarWidth: CGFloat = 8
         score.updateScore(isCorrect: isCorrect)
         appState = AppState.drawing
     }
-
+    
     func clearCanvas() {
         strokes.removeAll()
     }
