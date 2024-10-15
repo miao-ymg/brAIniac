@@ -12,8 +12,8 @@ import os
 let canvasSideLength: CGFloat = 280
 let strokeWidth: CGFloat = 8
 // Confidence bar dimensions
-let confBarHeight: CGFloat = 100
-let confBarWidth: CGFloat = 8
+let confBarHeight: CGFloat = 128
+let confBarWidth: CGFloat = 12
 
 @Observable class ViewModel {
     // The collection of strokes drawn

@@ -12,7 +12,7 @@ struct PredictionView: View {
 
     var body: some View {
         // Display confidence bar for each digit
-        HStack {
+        HStack(spacing: 16) {
             ForEach(viewModel.prediction.confidences, id: \.self) { confidence in
                 ConfidenceBarView(
                     conf: confidence,
@@ -20,6 +20,9 @@ struct PredictionView: View {
                 )
             }
         }
+        
+        Spacer()
+        
         // Display AI prediction
         HStack {
             Text("I recognized: ")
@@ -27,6 +30,9 @@ struct PredictionView: View {
             Text("\(viewModel.prediction.predictedNumber)")
                 .font(Font.system(size: 36, weight: .semibold))
         }
+        
+        Spacer()
+        
         // Allow feedback
         HStack {
             // Correct prediction

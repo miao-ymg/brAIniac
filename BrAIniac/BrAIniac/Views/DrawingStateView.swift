@@ -13,10 +13,13 @@ struct DrawingStateView: View {
     var body: some View {
         // Instructions
         HStack {
+            Text("Draw a number between 0-9")
+                .font(Font.system(size: 24, weight: .medium))
             Image(systemName: "pencil.and.scribble")
-            Text("Draw a number between 0 and 9")
-                .fontWeight(.medium)
         }
+        
+        Spacer()
+        
         // Button to clear the canvas
         Button {
             viewModel.clearCanvas()
@@ -36,5 +39,7 @@ struct DrawingStateView: View {
         }
         .buttonModifier(backgroundColor: Color.blue)
         .padding(.horizontal)
+        
+        Spacer()
     }
 }
