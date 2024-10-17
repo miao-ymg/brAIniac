@@ -13,13 +13,10 @@ struct ContentView: View {
     var body: some View {
         HStack {
             Text("BrAIniac")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                // .font(.promptFont(40, weight: .semibold))
+                .font(.custom("Prompt-SemiBold", size: 36))
             Spacer()
-            // Image("")
         }
-        .padding(.leading, 32)
+        .padding(.leading, 24)
         
         // Canvas to draw on
         VStack {
@@ -48,7 +45,6 @@ struct ContentView: View {
                 PredictionView(viewModel: viewModel)
             }
         }
-        .padding()
         
         Spacer()
 
