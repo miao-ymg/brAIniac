@@ -7,9 +7,18 @@
 
 import SwiftUI
 
+/**
+ A structure that represents an entire prediction by the AI for a drawing.
+
+ - Conformance:
+    - `Decodable`: This struct can be initialized from a JSON object.
+ */
 @Observable class Prediction: Decodable {
+    /// The final predicted number as a string.
     var predictedNumber: String = "N/A"
+    /// The confidence for that predicted number.
     var maxConfidence: Double = -1
+    /// The confidence properties for each digit between 0-9.
     var confidences: [Confidence] = []
     
     init() { }
@@ -36,6 +45,13 @@ import SwiftUI
         confidences = confidences.sorted { $0.digit < $1.digit }
     }
     
+    /**
+     Rounds a given number to three decimal places.
+
+     - Parameter num: The value to be rounded.
+
+     - Returns: The rounded value.
+     */
     func myRound(num: Double) -> Double {
         return round(num * 1000) / 1000
     }

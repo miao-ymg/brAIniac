@@ -8,6 +8,17 @@
 import UIKit
 import os
 
+/**
+ Create an `UIImage` from the user's drawing.
+
+ - Parameters:
+   - points: A 2D array of `CGPoint` values representing the user's drawing. Each inner array corresponds to a stroke or path.
+   - sideLength: The length of each side of the square image to be created.
+ 
+ - Throws: An error if the image creation process fails.
+ 
+ - Returns: A `UIImage` object generated from the points.
+ */
 func createImage(from points: [[CGPoint]], sideLength: CGFloat) throws -> UIImage {
     UIGraphicsBeginImageContext(CGSize(width: sideLength, height: sideLength))
     // Black digit required for AI model to work
@@ -35,7 +46,17 @@ func createImage(from points: [[CGPoint]], sideLength: CGFloat) throws -> UIImag
     return image
 }
 
+/**
+ Perform an API request to predict the number in the drawing using AI.
 
+ - Parameter image: The `UIImage` to be sent to the server for prediction.
+ 
+ - Throws: An error if the network request fails or the server returns an error.
+ 
+ - Returns: A `Data` object containing the prediction result and confidence values.
+ 
+ - Note: This function uses Swift's `async`/`await` for handling asynchronous requests.
+ */
 func requestPrediction(image: UIImage) async throws -> Data {
     // Reference: https://universe.roboflow.com/popular-benchmarks/mnist-cjkff/model/1
     

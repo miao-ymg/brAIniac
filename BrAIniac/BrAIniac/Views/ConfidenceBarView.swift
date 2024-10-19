@@ -7,9 +7,14 @@
 
 import SwiftUI
 
+/**
+ A view to display an individual confidence bar for a digit.
+ */
 struct ConfidenceBarView: View {
     let conf: Confidence
+    /// The maximum existing confidence level of the parent prediction.
     let maxConfidence: Double
+    /// The dynamic height of the displayed confidence capsule view for animation.
     @State private var animatedHeight: CGFloat = 0
 
     var body: some View {
@@ -35,6 +40,13 @@ struct ConfidenceBarView: View {
         }
     }
     
+    /**
+     Computes the theoretical height of a confidence capsule view based on a confidence level.
+
+     - Parameter confidence: A `Double` representing a confidence level.
+
+     - Returns: A `CGFloat` representing the computed theoretical view height.
+     */
     func computeConfidenceHeight(confidence: Double) -> CGFloat {
         if confidence == 0 {
             return 0

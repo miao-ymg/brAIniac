@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/**
+ A view that represents the canvas where users can draw a digit on.
+ */
 struct CanvasView: View {
     @Binding var strokes: [[CGPoint]]
     var appState: AppState
@@ -56,7 +59,13 @@ struct CanvasView: View {
     }
 }
 
+/**
+ Checks if the user's finger is within the defined edges of the canvas.
 
+ - Parameter coordinate: A `Double` value representing a coordinate to check.
+
+ - Returns: A boolean value indicating whether the finger is within (`true`) or outside (`false`) the edges.
+ */
 func isWithinEdges(coordinate: Double) -> Bool {
     return (strokeWidth / 2...canvasSideLength - strokeWidth / 2).contains(coordinate)
 }

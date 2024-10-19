@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+/**
+ The view representing a button which the user can click on to give feedback to the AI prediction.
+ */
 struct FeedbackButtonView: View {
     let buttonColor: Color
+    /// The icon to be displayed within the button
     let sfsSymbol: String
     let isCorrect: Bool
     @Bindable var viewModel: ViewModel

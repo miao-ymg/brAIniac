@@ -16,19 +16,17 @@ let confBarHeight: CGFloat = 120
 let confBarWidth: CGFloat = 12
 
 @Observable class ViewModel {
-    // The collection of strokes drawn
+    /// A 2D array of `CGPoint` values representing the user's drawing.
     var strokes: [[CGPoint]] = []
-    // The AI model's prediction
     var prediction = Prediction()
-    // An @Observable instance for the scoreboard
     var score = Score()
-    // One of three states which the app currently is in
     var appState = AppState.drawing
-    // Bool whether user tries to submit an empty drawing
+    /// A boolean indicating whether the user tries to submit an empty drawing.
     var hasEmptySubmission = false
     
-    
+    /// Handles the entire process of the user submitting a drawing to request a prediction.
     func makePrediction() {
+        // No submission made for an empty canvas
         if strokes.isEmpty {
             hasEmptySubmission = true
             return
@@ -58,12 +56,18 @@ let confBarWidth: CGFloat = 12
         }
     }
     
+    /**
+     Handles the entire process of the user giving feedback to the received prediction.
+
+     - Parameter isCorrect: A boolean value indicating whether the prediction was correct.
+     */
     func giveFeedback(isCorrect: Bool) {
         clearCanvas()
         score.updateScore(isCorrect: isCorrect)
         appState = AppState.drawing
     }
     
+    /// Clears the canvas
     func clearCanvas() {
         strokes.removeAll()
     }

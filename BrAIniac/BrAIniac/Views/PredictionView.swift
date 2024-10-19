@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/**
+ The view to be displayed below the canvas during the `madePrediction` state.
+ */
 struct PredictionView: View {
     @Bindable var viewModel: ViewModel
 

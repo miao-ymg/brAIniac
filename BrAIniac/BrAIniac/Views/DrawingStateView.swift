@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/**
+ The view to be displayed below the canvas during the `drawing` state.
+ */
 struct DrawingStateView: View {
     @Bindable var viewModel: ViewModel
 

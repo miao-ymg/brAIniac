@@ -8,16 +8,24 @@
 import SwiftUI
 import Subsonic
 
+/// A class that tracks the score of correctly recognized digits by the AI.
 @Observable class Score {
+    /// The respective number of total correct & wrong AI predictions.
     var totalCorrect: Int = 0
     var totalWrong: Int = 0
-    
+    /// A sound player which plays a sound depending on the user's feedback.
     let soundPlayer = SubsonicController.shared
+    /// The respective number of existing sound files.
     var totalSounds = ["correct": 4, "wrong": 5]
-    // Index of currently selected sounds
+    /// The respective index of the sound file which should be played next.
     var curCorrect = 0
     var curWrong = 0
     
+    /**
+     Updates the score based on the user's feedback.
+
+     - Parameter isCorrect: A boolean value indicating whether the prediction was correct.
+     */
     func updateScore(isCorrect: Bool) {
         if isCorrect {
             curCorrect = (curCorrect + 1) % (totalSounds["correct"] ?? 0)
@@ -30,6 +38,11 @@ import Subsonic
         }
     }
     
+    /**
+     Returns the score to be displayed in the UI.
+
+     - Returns: The string representation of the current score.
+     */
     func displayScore() -> String {
         return "\(totalCorrect)/\(totalCorrect + totalWrong)"
     }
