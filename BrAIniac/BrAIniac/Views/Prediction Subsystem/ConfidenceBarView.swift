@@ -11,6 +11,10 @@ import SwiftUI
  A view to display an individual confidence bar for a digit.
  */
 struct ConfidenceBarView: View {
+    /// The height & width of the confidence bar views.
+    let confBarHeight: CGFloat = 120
+    let confBarWidth: CGFloat = 12
+    
     let conf: Confidence
     /// The maximum existing confidence level of the parent prediction.
     let maxConfidence: Double

@@ -12,6 +12,8 @@ import SwiftUI
  */
 struct CanvasView: View {
     @Binding var strokes: [[CGPoint]]
+    let canvasSideLength: CGFloat
+    let strokeWidth: CGFloat
     var appState: AppState
     
     var body: some View {
@@ -57,15 +59,15 @@ struct CanvasView: View {
             )
         }
     }
-}
+    
+    /**
+     Checks if the user's finger is within the defined edges of the canvas.
 
-/**
- Checks if the user's finger is within the defined edges of the canvas.
+     - Parameter coordinate: A `Double` value representing a coordinate to check.
 
- - Parameter coordinate: A `Double` value representing a coordinate to check.
-
- - Returns: A boolean value indicating whether the finger is within (`true`) or outside (`false`) the edges.
- */
-func isWithinEdges(coordinate: Double) -> Bool {
-    return (strokeWidth / 2...canvasSideLength - strokeWidth / 2).contains(coordinate)
+     - Returns: A boolean value indicating whether the finger is within (`true`) or outside (`false`) the edges.
+     */
+    func isWithinEdges(coordinate: Double) -> Bool {
+        return (strokeWidth / 2...canvasSideLength - strokeWidth / 2).contains(coordinate)
+    }
 }

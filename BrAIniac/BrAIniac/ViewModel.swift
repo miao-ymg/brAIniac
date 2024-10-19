@@ -8,12 +8,6 @@
 import SwiftUI
 import os
 
-// GLOBAL CONSTANTS
-let canvasSideLength: CGFloat = 280
-let strokeWidth: CGFloat = 8
-// Confidence bar dimensions
-let confBarHeight: CGFloat = 120
-let confBarWidth: CGFloat = 12
 
 @Observable class ViewModel {
     /// A 2D array of `CGPoint` values representing the user's drawing.
@@ -23,6 +17,10 @@ let confBarWidth: CGFloat = 12
     var appState = AppState.drawing
     /// A boolean indicating whether the user tries to submit an empty drawing.
     var hasEmptySubmission = false
+    /// The length of the edges of the canvas
+    let canvasSideLength: CGFloat = 280
+    /// The width of a stroke when drawing on the canvas
+    let strokeWidth: CGFloat = 8
     
     /// Handles the entire process of the user submitting a drawing to request a prediction.
     func makePrediction() {
@@ -34,7 +32,7 @@ let confBarWidth: CGFloat = 12
         
         Task {
             do {
-                let drawing = try createImage(from: strokes, sideLength: canvasSideLength)
+                let drawing = try createImage(from: strokes, sideLength: canvasSideLength, strokeWidth: strokeWidth)
                 appState = AppState.thinking
                 hasEmptySubmission = false
                 // Asynchronous call

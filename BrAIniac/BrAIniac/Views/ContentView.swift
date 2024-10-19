@@ -20,8 +20,13 @@ struct ContentView: View {
         
         // Canvas to draw on
         VStack {
-            CanvasView(strokes: $viewModel.strokes, appState: viewModel.appState)
-                .frame(width: canvasSideLength, height: canvasSideLength)
+            CanvasView(
+                strokes: $viewModel.strokes,
+                canvasSideLength: viewModel.canvasSideLength,
+                strokeWidth: viewModel.strokeWidth,
+                appState: viewModel.appState
+            )
+                .frame(width: viewModel.canvasSideLength, height: viewModel.canvasSideLength)
                 // Rounded edges for the canvas
                 .cornerRadius(10)
                 .overlay(

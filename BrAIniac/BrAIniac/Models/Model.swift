@@ -14,12 +14,13 @@ import os
  - Parameters:
    - points: A 2D array of `CGPoint` values representing the user's drawing. Each inner array corresponds to a stroke or path.
    - sideLength: The length of each side of the square image to be created.
+   - strokeWidth: The width of a stroke on the generated image.
  
  - Throws: An error if the image creation process fails.
  
  - Returns: A `UIImage` object generated from the points.
  */
-func createImage(from points: [[CGPoint]], sideLength: CGFloat) throws -> UIImage {
+func createImage(from points: [[CGPoint]], sideLength: CGFloat, strokeWidth: CGFloat) throws -> UIImage {
     UIGraphicsBeginImageContext(CGSize(width: sideLength, height: sideLength))
     // Black digit required for AI model to work
     UIColor.black.setStroke()
